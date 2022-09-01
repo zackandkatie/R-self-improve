@@ -34,9 +34,16 @@ pacman::p_load(
 
 
 
-##---------------------------------------------------------------
-##                              01 Shiny                       -
-##---------------------------------------------------------------
+##################################################################
+##                              01                              ##
+##                             Shiny                            ##
+##################################################################
+
+
+##################################################################
+##                       Simple examples                        ##
+##                                                              ##
+##################################################################
 
 ui <- fluidPage(
   "Hello, world!"
@@ -44,6 +51,21 @@ ui <- fluidPage(
 server <- function(input, output, session) {
 }
 shinyApp(ui, server)
+
+
+ui <- fluidPage(
+  numericInput(inputId  = "n",
+                "Sample size", value = 25),
+plotOutput(outputId = "hist")
+)
+
+server <- function(input, output){
+  output$hist <- renderPlot({
+    hist(rnorm(input$n))
+  })
+}
+shinyApp(ui = ui, server = server)
+
 
 ui <- fluidPage(
   selectInput("dataset", label = "Dataset", choices = ls("package:datasets")),
