@@ -2,10 +2,9 @@
 # #Author:Zack
 # #File description:To learn some new packages and do some little projects
 # #Date:2022/09/04
-getwd()
 library("shiny")
 library("openxlsx")
-Raw <- read.xlsx("隔离餐费.xlsx")
+
 #Define UI for dataset viewer app---
 
 ui <- fluidPage(
@@ -43,11 +42,13 @@ ui <- fluidPage(
 server <- function(input, output){
   #Rreturn the requested dataset ----
   datasetInput <- reactive({
-    switch(input$dataset,
-           "rock"=rock,
-           "pressure"=pressure,
-           "cars"=cars,
-           "Raw"=Raw)
+    switch(
+      input$dataset,
+      "rock" = rock,
+      "pressure" = pressure,
+      "cars" = cars,
+      "Raw" = Raw
+    )
   })
   #Generate a summary of the dataset---
   output$summary <- renderPrint({
